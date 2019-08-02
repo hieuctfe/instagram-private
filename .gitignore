@@ -9,5 +9,5 @@ php-*
 sandbox.*
 Untitled*
 .idea
-.env
 dist
+packgage-lock.json

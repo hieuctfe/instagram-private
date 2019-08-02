@@ -1,11 +1,10 @@
 {
   "development": {
     "username": "root",
-    "password": "123456789",
+    "password": "P@12345678",
     "database": "insta_bot",
     "host": "127.0.0.1",
-    "dialect": "mysql",
-    "operatorsAliases": false
+    "dialect": "mysql"
   },
   "test": {
     "username": "root",
