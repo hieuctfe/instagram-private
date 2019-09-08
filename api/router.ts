@@ -4,6 +4,7 @@ import transactionCtrl from '../controller/transaction';
 
 module.exports = function(app) {
   app.route('/folowing/autoFollow').get(followingCtrl.auto_follow);
+  app.route('/folowing/autoLike').get(followingCtrl.auto_like);
   app.route('/account').get(accountCtrl.get);
   app.route('/account').post(accountCtrl.create);
   app.route('/account').delete(accountCtrl.delete);

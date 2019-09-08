@@ -5,6 +5,7 @@ var account_1 = require("../controller/account");
 var transaction_1 = require("../controller/transaction");
 module.exports = function (app) {
     app.route('/folowing/autoFollow').get(following_1["default"].auto_follow);
+    app.route('/folowing/autoLike').get(following_1["default"].auto_like);
     app.route('/account').get(account_1["default"].get);
     app.route('/account').post(account_1["default"].create);
     app.route('/account')["delete"](account_1["default"]["delete"]);

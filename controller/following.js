@@ -111,9 +111,123 @@ exports["default"] = {
             }
         });
     }); },
+    auto_like: function (request, response) { return __awaiter(_this, void 0, void 0, function () {
+        var username, number, random_account_list, result;
+        var _this = this;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    username = 'hieuctfe';
+                    number = 1;
+                    random_account_list = [];
+                    return [4 /*yield*/, Model.User.findAll()];
+                case 1:
+                    result = _a.sent();
+                    if (number && number > result.length) {
+                        response.json({
+                            status: false,
+                            message: 'Số lượng account không đủ'
+                        });
+                    }
+                    else {
+                        while (random_account_list.length < number) {
+                            random_account_list.push(result[Math.floor(Math.random() * result.length)]);
+                        }
+                        Promise.all(random_account_list.map(function (userInfo, idx) { return __awaiter(_this, void 0, void 0, function () {
+                            var _this = this;
+                            return __generator(this, function (_a) {
+                                return [2 /*return*/, new Promise(function (rs, rj) {
+                                        setTimeout(function () { return __awaiter(_this, void 0, void 0, function () {
+                                            var loginInfo, ig, userId, user, postList, firstPost, e_2;
+                                            return __generator(this, function (_a) {
+                                                switch (_a.label) {
+                                                    case 0:
+                                                        _a.trys.push([0, 7, , 8]);
+                                                        return [4 /*yield*/, login_1["default"](userInfo)];
+                                                    case 1:
+                                                        loginInfo = _a.sent();
+                                                        ig = loginInfo.ig;
+                                                        return [4 /*yield*/, ig.user.getIdByUsername(username)];
+                                                    case 2:
+                                                        userId = _a.sent();
+                                                        return [4 /*yield*/, ig.user.info(userId)];
+                                                    case 3:
+                                                        user = _a.sent();
+                                                        return [4 /*yield*/, ig.feed.user(user.pk).request()];
+                                                    case 4:
+                                                        postList = _a.sent();
+                                                        firstPost = postList.items[0];
+                                                        if (!firstPost.pk) return [3 /*break*/, 6];
+                                                        return [4 /*yield*/, ig.media.like({
+                                                                mediaId: firstPost.pk,
+                                                                moduleInfo: {
+                                                                    module_name: 'profile',
+                                                                    user_id: loginInfo.auth.pk,
+                                                                    username: loginInfo.auth.username
+                                                                },
+                                                                d: 0
+                                                            })];
+                                                    case 5:
+                                                        _a.sent();
+                                                        _a.label = 6;
+                                                    case 6:
+                                                        console.log('xong: ' + userInfo.username);
+                                                        rs();
+                                                        return [3 /*break*/, 8];
+                                                    case 7:
+                                                        e_2 = _a.sent();
+                                                        console.log('lỗi: ' + userInfo.username);
+                                                        rs();
+                                                        return [3 /*break*/, 8];
+                                                    case 8: return [2 /*return*/];
+                                                }
+                                            });
+                                        }); }, idx * 5000);
+                                    })];
+                            });
+                        }); })).then(function (res) {
+                            console.log('xong hết');
+                        });
+                        response.json({
+                            status: true,
+                            message: 'Đã thực hiện lệnh'
+                        });
+                    }
+                    return [2 /*return*/];
+            }
+        });
+    }); },
     test: function (request, response) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
+                // await Model.User.create({
+                //     username: 'Adalia.workshop',
+                //     password: '25161114',
+                //     proxy: 'http://lephuong1199539:88sxWuuoJip0@45.63.4.66:25346'
+                // })
+                //
+                // await Model.Transaction.create({
+                //     customerUserName: 'Hieu Cao',
+                //     packageId: '1',
+                //     phone: "0839365555",
+                //     note: "Here is note",
+                // })
+                // await Model.TransactionDetail.create({
+                //     userId: '1',
+                //     transactionId: '1',
+                //     isFollowing: true,
+                //     postLiked: "1234",
+                // })
+                Model.TransactionDetail.findAll().then(function (res) {
+                    try {
+                        res[0].getTransaction().then(function (res1) {
+                            response.json(res1);
+                        });
+                    }
+                    catch (e) {
+                        response.json({ status: false });
+                    }
+                });
                 return [2 /*return*/];
             });
         });
