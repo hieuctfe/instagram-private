@@ -22,6 +22,7 @@ export default {
     }
   },
   get: async function(request, response) {
+    console.log('dsf')
     const Op = sequelize.Op;
     const request_data = request.body;
     const txtSearch = request_data.txtSearch ? request_data.txtSearch : '';
@@ -39,6 +40,7 @@ export default {
       });
       response.json({ data: result, status: true });
     } catch (e) {
+      console.log(e)
       response.json({
         status: false,
       });

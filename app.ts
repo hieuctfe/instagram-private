@@ -2,6 +2,7 @@ var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
 var routes = require('./api/router');
+// import routes from './api/router';
 var cors = require('cors');
 // require('dotenv').load()
 var model = require('./models');

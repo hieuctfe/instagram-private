@@ -1,15 +1,15 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const package = sequelize.define('package', {
+  const packages = sequelize.define('Packages', {
     name: DataTypes.STRING,
     price: DataTypes.FLOAT
   }, {
     underscored: true,
   });
-  package.associate = function(models) {
+  packages.associate = function(models) {
     // associations can be defined here
-    models.Package.hasMany(models.Transaction)
-    
+    models.Packages.hasMany(models.Transaction)
+
   };
-  return package;
+  return packages;
 };
